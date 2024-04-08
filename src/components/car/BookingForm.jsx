@@ -19,7 +19,6 @@ const BookingForm = ({
   pendingSeats,
   approvedSeats,
 }) => {
-  console.log(book);
   const [loading, setLoading] = useState(false);
   const tempFunc = async () => {
     try {
