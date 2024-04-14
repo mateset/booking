@@ -136,16 +136,16 @@ const CarInterface = ({
   const postToServer = async () => {
     try {
       if (
-        !book.userName &&
-        book.userName.length > 3 &&
-        book.userName.length < 30
+        !book.userName ||
+        book.userName.length < 3 ||
+        book.userName.length > 30
       ) {
         return showToast('Please enter a valid name', 'warning');
       }
       if (
-        !book.phoneNumber &&
-        book.phoneNumber.length > 8 &&
-        book.phoneNumber.length < 15 &&
+        !book.phoneNumber ||
+        book.phoneNumber.length < 8 ||
+        book.phoneNumber.length > 15 ||
         !isNaN(book.phoneNumber)
       ) {
         return showToast('Please enter a valid phone number', 'warning');
