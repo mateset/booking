@@ -81,12 +81,16 @@ const CarInterface = ({
 
   const handleApproveBooking = async (id) => {
     try {
-      if (!id) return showToast('booking is empty', 'warning');
-      const res = await approveBooking(id);
-      showToast('Booking Approved', 'success');
-      setApprovedSeats([...approvedSeats, res.seatNumber]);
-      setDefaultBook();
-      setOpen(false);
+      if (window.confirm('Are you sure to approve this booking?')) {
+        if (!id) return showToast('booking is empty', 'warning');
+        const res = await approveBooking(id);
+        showToast('Booking Approved', 'success');
+        setPendingSeats(pendingSeats.filter((seat) => seat !== res.seatNumber));
+        setApprovedSeats([...approvedSeats, res.seatNumber]);
+        setDefaultBook();
+        setOpen(false);
+        if (!id) return showToast('booking is empty', 'warning');
+      }
     } catch (err) {
       showToast(
         err.response?.data?.message || 'you are not admin. please login',
@@ -97,14 +101,17 @@ const CarInterface = ({
 
   const handleCancleBooking = async (id) => {
     try {
-      if (!id) return showToast('booking is empty', 'warning');
-      const res = await cancelBooking(id);
-      // toast.success('Booking Canceled');
-      showToast('Booking Canceled', 'success');
-      setApprovedSeats(approvedSeats.filter((seat) => seat !== res.seatNumber));
-      setPendingSeats([...pendingSeats, res.seatNumber]);
-      setDefaultBook();
-      setOpen(false);
+      if (window.confirm('Are you sure to cancel this booking?')) {
+        if (!id) return showToast('booking is empty', 'warning');
+        const res = await cancelBooking(id);
+        showToast('Booking Canceled', 'success');
+        setApprovedSeats(
+          approvedSeats.filter((seat) => seat !== res.seatNumber)
+        );
+        setPendingSeats([...pendingSeats, res.seatNumber]);
+        setDefaultBook();
+        setOpen(false);
+      }
     } catch (err) {
       showToast(
         err.response?.data?.message || 'you are not admin. please login'
@@ -114,14 +121,18 @@ const CarInterface = ({
 
   const handleDeleteBooking = async (id) => {
     try {
-      if (!id) return showToast('booking is empty', 'warning');
-      const res = await deleteBooking(id);
-      showToast('Booking Deleted', 'success');
-      setPendingSeats(pendingSeats.filter((seat) => seat !== res.seatNumber));
-      setApprovedSeats(approvedSeats.filter((seat) => seat !== res.seatNumber));
-      setAvailableSeats([...availableSeats, res.seatNumber]);
-      setDefaultBook();
-      setOpen(false);
+      if (window.confirm('Are you sure to delete this booking?')) {
+        if (!id) return showToast('booking is empty', 'warning');
+        const res = await deleteBooking(id);
+        showToast('Booking Deleted', 'success');
+        setPendingSeats(pendingSeats.filter((seat) => seat !== res.seatNumber));
+        setApprovedSeats(
+          approvedSeats.filter((seat) => seat !== res.seatNumber)
+        );
+        setAvailableSeats([...availableSeats, res.seatNumber]);
+        setDefaultBook();
+        setOpen(false);
+      }
     } catch (err) {
       showToast(
         err.response?.data?.message || "you can't delete this",

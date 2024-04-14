@@ -148,34 +148,36 @@ const BookingForm = ({
         >
           Book
         </button>
-        <div>
-          {isAdmin &&
-            (book.isApproved ? (
+        {book._id && (
+          <div>
+            {isAdmin &&
+              (book.isApproved ? (
+                <button
+                  onClick={() => {
+                    handleCancleBooking(book?._id);
+                  }}
+                  className='m-2 bg-orange-500 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md text-white w-28 rounded-full p-2'
+                >
+                  Cancle
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleApproveBooking(book?._id)}
+                  className='m-2 bg-orange-600 hover:bg-orange-300 text-white w-28 rounded-full p-2'
+                >
+                  Approve
+                </button>
+              ))}
+            {isAdmin && (
               <button
-                onClick={() => {
-                  handleCancleBooking(book?._id);
-                }}
-                className='m-2 bg-orange-500 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md text-white w-32 rounded-full p-2'
+                className='m-2 bg-orange-600 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md w-32 text-white rounded-full p-2'
+                onClick={() => handleDeleteBooking(book?._id)}
               >
-                Cancle
+                delete
               </button>
-            ) : (
-              <button
-                onClick={() => handleApproveBooking(book?._id)}
-                className='m-2 bg-orange-600 hover:bg-orange-300 text-white w-auto rounded-full p-2'
-              >
-                Approve
-              </button>
-            ))}
-          {isAdmin && (
-            <button
-              className='m-2 bg-orange-600 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md w-32 text-white rounded-full p-2'
-              onClick={() => handleDeleteBooking(book?._id)}
-            >
-              delete
-            </button>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }
