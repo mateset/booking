@@ -136,12 +136,30 @@ const CarInterface = ({
   const postToServer = async () => {
     try {
       if (
+        !book.userName &&
+        book.userName.length > 3 &&
+        book.userName.length < 30
+      ) {
+        return showToast('Please enter a valid name', 'warning');
+      }
+      if (
+        !book.phoneNumber &&
+        book.phoneNumber.length > 8 &&
+        book.phoneNumber.length < 15 &&
+        !isNaN(book.phoneNumber)
+      ) {
+        return showToast('Please enter a valid phone number', 'warning');
+      }
+      if (
         !book.userName ||
         !book.phoneNumber ||
         !book.pickupLocation ||
         !book.deliveryLocation
       ) {
         return showToast('Please fill all required fields', 'warning');
+      }
+      if (book.message.length > 100) {
+        return showToast('Message is too long', 'warning');
       }
       const existingBookingsJSON = localStorage.getItem('bookings');
       let existingBookings = existingBookingsJSON
