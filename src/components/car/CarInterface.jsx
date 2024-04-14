@@ -8,8 +8,7 @@ import {
 } from '../../service/bookingService';
 import CarSeatIcon from '../../utils/CarSeatIcon';
 import BookingForm from './BookingForm';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { showToast } from '../../utils/Toast';
 
 const defaultBook = {
   _id: null,
@@ -29,7 +28,7 @@ const CarInterface = ({
   const [pendingSeats, setPendingSeats] = useState([]); // [1, 2, 3, 4]
   const [approvedSeats, setApprovedSeats] = useState([]);
   const [open, setOpen] = useState(false);
-  //clicked is used to check if the button is clicked or not if clicked then run the tempFunc for admin
+  //clicked is used to check if the button is clicked and not if clicked then run the tempFunc for admin
   //to get the seats data and show as default
   const [clicked, setClicked] = useState(false);
   const [book, setBook] = useState({
@@ -38,7 +37,6 @@ const CarInterface = ({
     carTime: '',
     bookingDate: '',
   });
-
   useEffect(() => {
     const tempFunc = async () => {
       try {
@@ -48,20 +46,21 @@ const CarInterface = ({
           setApprovedSeats(approvedSeats);
           setAvailableSeats(availableSeats);
           setPendingSeats(pendingSeats);
-          console.log(pendingSeats, availableSeats, approvedSeats);
-          console.log(choseDate, chosenTime, chosenDirection);
+        } else {
+          showToast('Please select date and direction', 'warning');
         }
       } catch (error) {
         if (error.response) {
           if (error.response.status === 429) {
-            toast.error(error?.response?.data || 'Too many requests');
+            showToast('Too many requests', 'error');
           } else {
-            toast.error(
-              error.response?.data?.message || 'Something went wrong'
+            showToast(
+              error.response?.data?.message || 'Something went wrong',
+              'error'
             );
           }
         } else {
-          toast.error('Something went wrong');
+          showToast('Something went wrong', 'error');
         }
       }
     };
@@ -82,29 +81,32 @@ const CarInterface = ({
 
   const handleApproveBooking = async (id) => {
     try {
-      if (!id) return toast.error('booking is empty');
+      if (!id) return showToast('booking is empty', 'warning');
       const res = await approveBooking(id);
-      toast.success('Booking Approved');
+      showToast('Booking Approved', 'success');
       setApprovedSeats([...approvedSeats, res.seatNumber]);
       setDefaultBook();
       setOpen(false);
     } catch (err) {
-      toast.error(
-        err.response?.data?.message || 'you are not admin. please login'
+      showToast(
+        err.response?.data?.message || 'you are not admin. please login',
+        'error'
       );
     }
   };
 
   const handleCancleBooking = async (id) => {
     try {
+      if (!id) return showToast('booking is empty', 'warning');
       const res = await cancelBooking(id);
-      toast.success('Booking Canceled');
+      // toast.success('Booking Canceled');
+      showToast('Booking Canceled', 'success');
       setApprovedSeats(approvedSeats.filter((seat) => seat !== res.seatNumber));
       setPendingSeats([...pendingSeats, res.seatNumber]);
       setDefaultBook();
       setOpen(false);
     } catch (err) {
-      toast.error(
+      showToast(
         err.response?.data?.message || 'you are not admin. please login'
       );
     }
@@ -112,16 +114,18 @@ const CarInterface = ({
 
   const handleDeleteBooking = async (id) => {
     try {
+      if (!id) return showToast('booking is empty', 'warning');
       const res = await deleteBooking(id);
-      toast.success('Booking Deleted');
+      showToast('Booking Deleted', 'success');
       setPendingSeats(pendingSeats.filter((seat) => seat !== res.seatNumber));
       setApprovedSeats(approvedSeats.filter((seat) => seat !== res.seatNumber));
       setAvailableSeats([...availableSeats, res.seatNumber]);
       setDefaultBook();
       setOpen(false);
     } catch (err) {
-      toast.error(
-        err.response?.data?.message || 'you are not admin. please login'
+      showToast(
+        err.response?.data?.message || "you can't delete this",
+        'error'
       );
     }
   };
@@ -131,6 +135,14 @@ const CarInterface = ({
 
   const postToServer = async () => {
     try {
+      if (
+        !book.userName ||
+        !book.phoneNumber ||
+        !book.pickupLocation ||
+        !book.deliveryLocation
+      ) {
+        return showToast('Please fill all required fields', 'warning');
+      }
       const existingBookingsJSON = localStorage.getItem('bookings');
       let existingBookings = existingBookingsJSON
         ? JSON.parse(existingBookingsJSON)
@@ -151,25 +163,20 @@ const CarInterface = ({
         const bookingWithExpiry = { ...book, expiryTime: expiryTime.getTime() };
 
         const res = await createBook(bookingWithExpiry);
-        toast.success('Booking successful', { position: 'top-center' });
         setPendingSeats([...pendingSeats, res.seatNumber]);
         setOpen(false);
-        existingBookings.push(bookingWithExpiry);
-        localStorage.setItem('bookings', JSON.stringify(existingBookings));
-
+        if (!isAdmin) {
+          existingBookings.push(bookingWithExpiry);
+          localStorage.setItem('bookings', JSON.stringify(existingBookings));
+        }
         setDefaultBook();
-        toast.success('Booking successful');
-
+        showToast('Booking successful', 'success');
         // Check for and remove expired bookings
       } else {
-        toast.error('You can only book 3 seats at a time, call the admin', {
-          position: 'top-center',
-        });
+        showToast('cannot book more than 3, call the admin', 'warning');
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Booking failed', {
-        position: 'top-center',
-      });
+      showToast(error.response?.data?.message || 'Booking failed', 'error');
     }
   };
 
@@ -252,7 +259,6 @@ const CarInterface = ({
           />
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

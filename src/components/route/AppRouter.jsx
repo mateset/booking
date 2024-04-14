@@ -12,6 +12,8 @@ import Activity from '../dashboard/Activity/Activity';
 import Order from '../dashboard/Order/Order';
 import Approved from '../dashboard/Approved/Approved';
 import Search from '../dashboard/Search/Search';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppRouter = () => {
   const routes = [
@@ -53,6 +55,7 @@ const AppRouter = () => {
 
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         {routes.map((item) =>
           routeGenerator({

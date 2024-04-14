@@ -4,9 +4,10 @@ import {
   removeCarTime,
   getCount,
 } from '../../service/bookingService';
-import { checkAdmin } from '../../service/adminService';
+import { checkAdmin, logout, logoutAll } from '../../service/adminService';
 import DateDropdown from '../../utils/DateDropdown';
 import TravelDirectionDropdown from '../../utils/TravelDirectionDropdown';
+import { showToast } from '../../utils/Toast';
 
 const ControlCarTime = () => {
   const [choseDate, setChoseDate] = React.useState('');
@@ -28,6 +29,8 @@ const ControlCarTime = () => {
   React.useEffect(() => {
     const getCounts = async () => {
       try {
+        if (!choseDate || !chosenDirection)
+          return showToast('Please select date and direction', 'warning');
         const response = await getCount(choseDate, chosenDirection);
         setCount(response.count);
       } catch (error) {}
@@ -38,11 +41,61 @@ const ControlCarTime = () => {
   const handleAddCarTime = async () => {
     if (window.confirm('Are you sure you want to add the car time?')) {
       try {
+        if (!choseDate || !chosenDirection)
+          return showToast('Please select date and direction', 'warning');
         const response = await addCarTime({
           bookingDate: choseDate,
           travelDirection: chosenDirection,
         });
         setCount(response.data.count);
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 429) {
+            showToast(error?.response?.data || 'Too many requests', 'error');
+          } else {
+            showToast(
+              error.response?.data?.message || 'Something went wrong',
+              'error'
+            );
+          }
+        } else {
+          showToast('Something went wrong', 'error');
+        }
+      }
+    }
+  };
+
+  const handleLogout = async () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      try {
+        const response = await logout();
+        if (response.data.success) {
+          window.location.href = '/login';
+        }
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 429) {
+            showToast(error?.response?.data || 'Too many requests', 'error');
+          } else {
+            showToast(
+              error.response?.data?.message || 'Something went wrong',
+              'error'
+            );
+          }
+        } else {
+          showToast('Something went wrong', 'error');
+        }
+      }
+    }
+  };
+
+  const handleLogoutAllDevices = async () => {
+    if (window.confirm('Are you sure you want to logout all devices?')) {
+      try {
+        const response = await logoutAll();
+        if (response.data.success) {
+          window.location.href = '/login';
+        }
       } catch (error) {}
     }
   };
@@ -88,13 +141,13 @@ const ControlCarTime = () => {
       </div>
       <button
         className='bg-blue-500 text-white w-32 p-2 mt-4 rounded-md active:shadow-md hover:bg-blue-400 hover:border-2 hover:border-blue-500'
-        // onClick={handleLogout}
+        onClick={handleLogout}
       >
         Logout
       </button>
       <button
         className='bg-blue-500 text-white w-32 p-2 mt-4 rounded-md active:shadow-md hover:bg-blue-400 hover:border-2 hover:border-blue-500'
-        // onClick={handleLogoutAllDevices}
+        onClick={handleLogoutAllDevices}
       >
         Logout all devices
       </button>

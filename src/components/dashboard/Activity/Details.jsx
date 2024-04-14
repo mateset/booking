@@ -1,6 +1,7 @@
 import React from 'react';
+import Context from '../components/Context';
 
-const Details = ({ data, showDetails, toggleDetails }) => {
+const Details = ({ data }) => {
   const {
     userName,
     phoneNumber,
@@ -41,60 +42,21 @@ const Details = ({ data, showDetails, toggleDetails }) => {
             Time: {carTime}
           </span>
         </div>
-        <div className='flex items-center mb-2'>
-          <span className='text-black-500 font-bold mr-2'>User: </span>
-          <span>{userName}</span>
-        </div>
-        <div className='flex items-center mb-2'>
-          <span className='text-black-500 font-bold mr-2'>Phone Number: </span>
-          <span>{phoneNumber}</span>
-        </div>
-        <div className='flex items-center mb-2'>
-          <span className='text-black-500 font-bold mr-2'>Date: </span>
-          <span>{formattedTime}</span>
-        </div>
-        {showDetails && (
-          <>
-            <div className='flex items-center mb-2'>
-              <span className='text-black-500 font-bold mr-2'>
-                Pickup Location:{' '}
-              </span>
-              <span>{pickupLocation}</span>
-            </div>
-            <div className='flex items-center mb-2'>
-              <span className='text-black-500 font-bold mr-2'>
-                Delivery Location:{' '}
-              </span>
-              <span>{deliveryLocation}</span>
-            </div>
-            <div className='flex items-center mb-2'>
-              <span className='text-black-500 font-bold mr-2'>
-                Seat Number:{' '}
-              </span>
-              <span>{seatNumber}</span>
-            </div>
-            <div className='flex items-center mb-2'>
-              <span className='text-black-500 font-semibold mr-2'>
-                Travel Direction:{' '}
-              </span>
-              <span>{travelDirection}</span>
-            </div>
-            {message && (
-              <div className='flex items-center mb-2'>
-                <span className='text-black-500 font-semibold mr-2'>
-                  Message:{' '}
-                </span>
-                <span>{message}</span>
-              </div>
-            )}
-          </>
+        <Context
+          userName={userName}
+          phoneNumber={phoneNumber}
+          formattedTime={formattedTime}
+          pickupLocation={pickupLocation}
+          deliveryLocation={deliveryLocation}
+          seatNumber={seatNumber}
+          travelDirection={travelDirection}
+        />
+        {message && (
+          <div className='flex items-center mb-2'>
+            <span className='text-black-500 font-semibold mr-2'>Message: </span>
+            <span>{message}</span>
+          </div>
         )}
-        <button
-          className='text-blue-500 hover:underline'
-          onClick={toggleDetails}
-        >
-          {showDetails ? 'Hide Details' : 'Show Details'}
-        </button>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import { getActivities } from '../../../service/bookingService';
 
 const Activity = () => {
   const today = new Date().toISOString().split('T')[0];
-  const [showDetails, setShowDetails] = useState(false);
   const [bookingDate, setBookingDate] = useState(today);
   const [activityData, setActivityData] = useState([]);
 
@@ -25,10 +24,6 @@ const Activity = () => {
       fetchData();
     }
   }, [bookingDate]);
-
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
 
   const formatDate = (date) => {
     const options = {
@@ -56,13 +51,7 @@ const Activity = () => {
         </div>
       ) : (
         activityData.map((activity, index) => (
-          <Details
-            data={activity}
-            showDetails={showDetails}
-            setShowDetails={setShowDetails}
-            key={index}
-            toggleDetails={toggleDetails}
-          />
+          <Details data={activity} key={index} />
         ))
       )}
     </div>

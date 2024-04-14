@@ -1,6 +1,15 @@
 import React from 'react';
+import Context from '../components/Context';
 
 const PendingSeatsList = ({ seat, handleApprove, handleDelete }) => {
+  const {
+    userName,
+    phoneNumber,
+    pickupLocation,
+    deliveryLocation,
+    seatNumber,
+    travelDirection,
+  } = seat;
   const createdAtDate = new Date(seat.createdAt);
   const options = {
     hour: 'numeric',
@@ -12,37 +21,19 @@ const PendingSeatsList = ({ seat, handleApprove, handleDelete }) => {
 
   return (
     <div className='border p-4 my-2 flex flex-col justify-center items-center'>
-      <p>
-        <strong>User Name:</strong> {seat.userName}
-      </p>
-      <p>
-        <strong>Booking Date:</strong> {seat.bookingDate}
-      </p>
-      <p>
-        <strong>Travel Direction:</strong> {seat.travelDirection}
-      </p>
-      <p>
-        <strong>Car Time:</strong> {seat.carTime}
-      </p>
-      <p>
-        <strong>Confirm at:</strong> {formattedTime}
-      </p>
-      <p>
-        <strong>Phone Number:</strong> {seat.phoneNumber}
-      </p>
-      <p>
-        <strong>Delivery Location:</strong> {seat.deliveryLocation}
-      </p>
-      <p>
-        <strong>Pickup Location:</strong> {seat.pickupLocation}
-      </p>
-      <p>
-        <strong>Message:</strong> {seat.message}
-      </p>
-      <p>
-        <strong>Seat Number:</strong> {seat.seatNumber}
-      </p>
-
+      <div className='flex items-center justify-center'>
+        <div className='rounded-lg box-border shadow-md w-auto p-4 mt-4 '>
+          <Context
+            userName={userName}
+            phoneNumber={phoneNumber}
+            formattedTime={formattedTime}
+            pickupLocation={pickupLocation}
+            deliveryLocation={deliveryLocation}
+            seatNumber={seatNumber}
+            travelDirection={travelDirection}
+          />
+        </div>
+      </div>
       <div className='flex mt-2'>
         <button
           onClick={() => handleApprove(seat._id)}

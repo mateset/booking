@@ -9,6 +9,24 @@ export const login = async (email, password) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    const response = await apiService.post(`/admin/logout`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const logoutAll = async () => {
+  try {
+    const response = await apiService.post(`/admin/logoutAll`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const checkAdmin = async () => {
   try {
     const response = await apiService.get(`/admin/isAdmin`);

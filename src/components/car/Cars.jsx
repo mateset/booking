@@ -7,7 +7,8 @@ import TravelDirectionDropdown from '../../utils/TravelDirectionDropdown';
 import CarInterface from './CarInterface';
 import { getCount } from '../../service/bookingService';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { showToast } from '../../utils/Toast';
+// import { showToast } from '../../utils/Toast';
 
 // i need to use memo not to execute the function again and again
 // when i change only date or time or direction only want to render the necessary part
@@ -26,20 +27,23 @@ const Cars = () => {
     const getCounts = async () => {
       try {
         setLoading(true);
-        const response = await getCount(choseDate, chosenDirection);
-        setCount(response.count);
-        setLoading(false);
+        if (choseDate && chosenDirection) {
+          const response = await getCount(choseDate, chosenDirection);
+          setCount(response.count);
+          setLoading(false);
+        } else {
+          showToast('Please select date and direction');
+          setLoading(true);
+        }
       } catch (error) {
         if (error.response) {
           if (error.response.status === 429) {
-            toast.error(error?.response?.data);
+            showToast(error?.response?.data || 'Too many requests');
           } else {
-            toast.error(
-              error.response?.data?.message || 'Something went wrong'
-            );
+            showToast(error.response?.data?.message || 'Something went wrong');
           }
         } else {
-          toast.error('Something went wrong');
+          showToast('Something went wrong');
         }
       }
     };
@@ -48,7 +52,6 @@ const Cars = () => {
   // if (loading) return <Loading />;
   return (
     <div className='flex flex-col justify-center items-center w-full h-auto'>
-      <ToastContainer />
       {/* Car img */}
       <h1 className='text-4xl font-bold'>မိတ်ဆက်</h1>
       <h3 className='text-4xl font-bold'>ကားသေးဝန်ဆောင်မှု</h3>
@@ -69,7 +72,7 @@ const Cars = () => {
       {isAdmin && (
         <div className='flex flex-col'>
           <Link
-            to='dashboard'
+            to='dashboard/order'
             className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 inline-flex items-center justify-center'
           >
             to dashboard

@@ -1,4 +1,5 @@
 import React from 'react';
+import Context from '../components/Context';
 
 const SearchResult = ({ data }) => {
   return (
@@ -8,7 +9,7 @@ const SearchResult = ({ data }) => {
           key={index}
           className='border p-4 my-2 flex flex-col justify-center items-center'
         >
-          <p>
+          {/* <p>
             <strong>Booking Date:</strong> {seat.bookingDate}
           </p>
           <p>
@@ -37,7 +38,21 @@ const SearchResult = ({ data }) => {
           </p>
           <p>
             <strong>User Name:</strong> {seat.userName}
-          </p>
+          </p> */}
+          <div className='flex items-center justify-center'>
+            <div className='rounded-lg box-border shadow-md w-auto p-4 mt-4 '>
+              <Context
+                userName={seat.userName}
+                phoneNumber={seat.phoneNumber}
+                formattedTime={seat.formattedTime}
+                pickupLocation={seat.pickupLocation}
+                deliveryLocation={seat.deliveryLocation}
+                seatNumber={seat.seatNumber}
+                travelDirection={seat.travelDirection}
+                isApproved={seat.isApproved}
+              />
+            </div>
+          </div>
           <div className='flex mt-2'></div>
         </div>
       ))}

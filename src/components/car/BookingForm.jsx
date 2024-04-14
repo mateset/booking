@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getBookingDataForForm } from '../../service/bookingService';
 import Loading from '../../utils/Loading';
+import { showToast } from '../../utils/Toast';
 
 const BookingForm = ({
   addDataToBook,
@@ -22,6 +23,14 @@ const BookingForm = ({
   const [loading, setLoading] = useState(false);
   const tempFunc = async () => {
     try {
+      if (
+        !book.bookingDate ||
+        !book.carTime ||
+        !book.travelDirection ||
+        !book.seatNumber
+      ) {
+        return showToast('Please select date and direction', 'warning');
+      }
       setLoading(true);
       const res = await getBookingDataForForm(
         book.bookingDate,
@@ -30,12 +39,16 @@ const BookingForm = ({
         book.seatNumber
       );
       if (res.data.length === 0) {
+        showToast('No data found', 'warning');
+        setLoading(false);
+        return;
       }
       setBook(res.data[0]);
       setLoading(false);
       setClicked(false);
     } catch (err) {
       setLoading(false);
+      showToast(err.response?.data?.message || 'Something went wrong', 'error');
     }
   };
 
@@ -58,9 +71,9 @@ const BookingForm = ({
   if (open) {
     return (
       <div
-        className={`absolute z-50 w-[80vw] h-auto border border-gray-100 bg-white shadow-lg rounded-lg flex flex-col justify-center items-center p-5 m-5 ${
+        className={`absolute z-50 mb w-[80vw] h-auto border border-gray-100 bg-white shadow-lg rounded-lg flex flex-col justify-center items-center p-5 m-5 ${
           open ? '' : 'hidden'
-        }`}
+        } mx-auto my-auto`}
       >
         <button
           onClick={() => {

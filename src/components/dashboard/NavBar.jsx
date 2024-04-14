@@ -36,12 +36,6 @@ const NavBar = () => {
             >
               Search
             </Link>
-            <Link
-              to='/dashboard/control-car-time'
-              className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-            >
-              Admin
-            </Link>
           </div>
         </div>
       </div>
