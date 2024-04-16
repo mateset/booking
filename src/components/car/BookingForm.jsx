@@ -156,24 +156,24 @@ const BookingForm = ({
                   onClick={() => {
                     handleCancleBooking(book?._id);
                   }}
-                  className='m-2 bg-orange-500 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md text-white w-28 rounded-full p-2'
+                  className='m-2 bg-orange-500 hover:bg-orange-300 active:shadow-md text-white text-xs rounded-full px-2 py-1'
                 >
-                  Cancle
+                  Cancel
                 </button>
               ) : (
                 <button
                   onClick={() => handleApproveBooking(book?._id)}
-                  className='m-2 bg-orange-600 hover:bg-orange-300 text-white w-28 rounded-full p-2'
+                  className='m-2 bg-orange-600 hover:bg-orange-300 text-white text-xs rounded-full px-2 py-1'
                 >
                   Approve
                 </button>
               ))}
             {isAdmin && (
               <button
-                className='m-2 bg-orange-600 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md w-32 text-white rounded-full p-2'
+                className='m-2 bg-orange-600 hover:bg-orange-300 hover:border-solid hover:border-2 hover:border-orange-600 active:shadow-md text-white text-xs rounded-full px-2 py-1'
                 onClick={() => handleDeleteBooking(book?._id)}
               >
-                delete
+                Delete
               </button>
             )}
           </div>

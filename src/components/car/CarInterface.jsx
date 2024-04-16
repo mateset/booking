@@ -157,7 +157,7 @@ const CarInterface = ({
         !book.phoneNumber ||
         book.phoneNumber.length < 8 ||
         book.phoneNumber.length > 15 ||
-        !isNaN(book.phoneNumber)
+        isNaN(book.phoneNumber)
       ) {
         return showToast('Please enter a valid phone number', 'warning');
       }
