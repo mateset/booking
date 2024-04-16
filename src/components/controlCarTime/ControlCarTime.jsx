@@ -69,9 +69,8 @@ const ControlCarTime = () => {
     if (window.confirm('Are you sure you want to logout?')) {
       try {
         const response = await logout();
-        if (response.data.success) {
-          window.location.href = '/login';
-        }
+        showToast(response?.data?.message || 'logout successfully', 'success');
+        sessionStorage.removeItem('isAdmin');
       } catch (error) {
         if (error.response) {
           if (error.response.status === 429) {
@@ -93,10 +92,25 @@ const ControlCarTime = () => {
     if (window.confirm('Are you sure you want to logout all devices?')) {
       try {
         const response = await logoutAll();
-        if (response.data.success) {
-          window.location.href = '/login';
+        showToast(
+          response?.data?.message || 'logout all successfully',
+          'success'
+        );
+        sessionStorage.removeItem('isAdmin');
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 429) {
+            showToast(error?.response?.data || 'Too many requests', 'error');
+          } else {
+            showToast(
+              error.response?.data?.message || 'Something went wrong',
+              'error'
+            );
+          }
+        } else {
+          showToast('Something went wrong', 'error');
         }
-      } catch (error) {}
+      }
     }
   };
 
