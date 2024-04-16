@@ -10,6 +10,8 @@ const ApprovedSeatsList = ({ seat, handleCancel, handleDelete }) => {
     deliveryLocation,
     seatNumber,
     travelDirection,
+    carTime,
+    bookingDate,
   } = seat;
   // Format options for toLocaleString
   const options = {
@@ -33,6 +35,8 @@ const ApprovedSeatsList = ({ seat, handleCancel, handleDelete }) => {
             deliveryLocation={deliveryLocation}
             seatNumber={seatNumber}
             travelDirection={travelDirection}
+            carTime={carTime}
+            bookingDate={bookingDate}
           />
         </div>
       </div>

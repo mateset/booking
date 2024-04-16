@@ -11,6 +11,7 @@ const Details = ({ data }) => {
     seatNumber,
     travelDirection,
     message,
+    bookingDate,
   } = data.booking_id;
   const { createdAt } = data;
   const createdAtDate = new Date(createdAt);
@@ -50,6 +51,8 @@ const Details = ({ data }) => {
           deliveryLocation={deliveryLocation}
           seatNumber={seatNumber}
           travelDirection={travelDirection}
+          carTime={carTime}
+          bookingDate={bookingDate}
         />
         {message && (
           <div className='flex items-center mb-2'>

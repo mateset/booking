@@ -50,6 +50,8 @@ const SearchResult = ({ data }) => {
                 seatNumber={seat.seatNumber}
                 travelDirection={seat.travelDirection}
                 isApproved={seat.isApproved}
+                carTime={seat.carTime}
+                bookingDate={seat.bookingDate}
               />
             </div>
           </div>

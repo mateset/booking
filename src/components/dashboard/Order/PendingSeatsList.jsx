@@ -9,6 +9,8 @@ const PendingSeatsList = ({ seat, handleApprove, handleDelete }) => {
     deliveryLocation,
     seatNumber,
     travelDirection,
+    carTime,
+    bookingDate,
   } = seat;
   const createdAtDate = new Date(seat.createdAt);
   const options = {
@@ -31,6 +33,8 @@ const PendingSeatsList = ({ seat, handleApprove, handleDelete }) => {
             deliveryLocation={deliveryLocation}
             seatNumber={seatNumber}
             travelDirection={travelDirection}
+            carTime={carTime}
+            bookingDate={bookingDate}
           />
         </div>
       </div>

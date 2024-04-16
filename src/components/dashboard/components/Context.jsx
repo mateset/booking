@@ -9,6 +9,8 @@ const Context = ({
   seatNumber,
   travelDirection,
   isApproved,
+  bookingDate,
+  carTime,
 }) => {
   return (
     <div>
@@ -37,12 +39,21 @@ const Context = ({
         <span>{seatNumber}</span>
       </div>
       <div className='flex items-center mb-2'>
-        <span className='text-black-500 font-semibold mr-2'>Direction: </span>
+        <span className='text-black-500 font-bold mr-2'>CarTime: </span>
+        <span>{carTime}</span>
+      </div>
+      <div className='flex items-center mb-2'>
+        <span className='text-black-500 font-bold mr-2'>Date: </span>
+        <span>{bookingDate}</span>
+      </div>
+      <div className='flex items-center mb-2'>
+        <span className='text-black-500 font-bold mr-2'>Direction: </span>
         <span>{travelDirection}</span>
       </div>
+
       {isApproved && (
         <div className='flex items-center mb-2'>
-          <span className='text-black-500 font-semibold mr-2'>Approved: </span>
+          <span className='text-black-500 font-bold mr-2'>Approved: </span>
           <span>Yes</span>
         </div>
       )}
