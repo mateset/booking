@@ -11,7 +11,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
-    const response = await apiService.post(`/admin/logout`);
+    const response = await apiService.get(`/admin/logout`);
     return response.data;
   } catch (error) {
     throw error;
@@ -20,7 +20,7 @@ export const logout = async () => {
 
 export const logoutAll = async () => {
   try {
-    const response = await apiService.post(`/admin/logoutAll`);
+    const response = await apiService.get(`/admin/logoutAll`);
     return response.data;
   } catch (error) {
     throw error;
