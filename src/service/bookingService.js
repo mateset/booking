@@ -10,6 +10,7 @@ export const checkSeatAvailability = async (date, time, from) => {
     const response = await apiService.get(
       `/checkseat/?date=${date}&time=${time}&from=${from}`
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -149,6 +150,7 @@ export const getCount = async (bookingDate, travelDirection) => {
       bookingDate,
       travelDirection,
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
