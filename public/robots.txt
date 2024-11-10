@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /login
 Disallow: /admin
+
+# Specify the sitemap location
+Sitemap: https://mateset.vercel.app/sitemap.xml
