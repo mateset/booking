@@ -37,10 +37,12 @@ const TimeDropdown = ({ setChosenTime, chosenTime, count }) => {
 
   return (
     <div className='mt-5'>
-      <label>Select a time:</label>
-      <select onChange={handleChooseTime} value={chosenTime}>
-        {options}
-      </select>
+      <label>
+        Select a time:
+        <select onChange={handleChooseTime} value={chosenTime}>
+          {options}
+        </select>
+      </label>
     </div>
   );
 };

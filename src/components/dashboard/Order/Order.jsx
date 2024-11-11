@@ -21,12 +21,12 @@ const Order = () => {
           const formattedDate = bookingDate
             ? formatDate(new Date(bookingDate))
             : null;
-          console.log(formattedDate);
+          // console.log(formattedDate);
           const pendingSeatsData = await getPendingSeats(formattedDate);
           setPendingSeats(pendingSeatsData.data);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     if (bookingDate) {
@@ -50,10 +50,10 @@ const Order = () => {
       if (window.confirm('Are you sure you want to approve this booking?')) {
         const response = await approveBooking(id);
         setPendingSeats(pendingSeats.filter((seat) => seat._id !== id));
-        console.log(response);
+        // console.log(response);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -63,10 +63,10 @@ const Order = () => {
       if (window.confirm('Are you sure you want to delete this booking?')) {
         const response = await deleteBooking(id);
         setPendingSeats(pendingSeats.filter((seat) => seat._id !== id));
-        console.log(response);
+        // console.log(response);
       }
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
     }
   };
 
@@ -76,8 +76,9 @@ const Order = () => {
         <input
           type='date'
           defaultValue={today}
+          name='OrderDate'
           onChange={(e) => setBookingDate(e.target.value)}
-          style={{ border: '2px solid black', fontSize: '2rem' }}
+          style={{ border: '2px solid black', fontSize: '1.5rem' }}
         />
       </div>
       <div className='flex justify-center mt-4'>

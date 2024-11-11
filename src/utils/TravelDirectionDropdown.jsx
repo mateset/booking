@@ -19,14 +19,16 @@ const TravelDirectionDropdown = ({ setChosenDirection, chosenDirection }) => {
 
   return (
     <div className='mt-3'>
-      <label>Select a direction:</label>
-      <select onChange={handleChooseDirection} value={chosenDirection}>
-        {directions.map((direction, index) => (
-          <option key={index} value={direction}>
-            {direction}
-          </option>
-        ))}
-      </select>
+      <label>
+        Select a direction:
+        <select onChange={handleChooseDirection} value={chosenDirection}>
+          {directions.map((direction, index) => (
+            <option key={index} value={direction}>
+              {direction}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   );
 };

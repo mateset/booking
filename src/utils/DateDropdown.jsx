@@ -46,14 +46,16 @@ const DateDropdown = ({ setChoseDate, choseDate }) => {
 
   return (
     <div className='mt-5'>
-      <label>Select a date:</label>
-      <select onChange={handleChooseDate} value={choseDate}>
-        {dates.map((date, index) => (
-          <option key={index} value={date}>
-            {date}
-          </option>
-        ))}
-      </select>
+      <label>
+        Select a date:
+        <select onChange={handleChooseDate} value={choseDate}>
+          {dates.map((date, index) => (
+            <option key={index} value={date}>
+              {date}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   );
 };

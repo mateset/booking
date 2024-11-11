@@ -41,8 +41,9 @@ const Activity = () => {
         <input
           type='date'
           defaultValue={today}
+          name='ActivityDate'
           onChange={(e) => setBookingDate(e.target.value)}
-          style={{ border: '2px solid black', fontSize: '2rem' }}
+          style={{ border: '2px solid black', fontSize: '1.5rem' }}
         />
       </div>
       {activityData.length === 0 ? (

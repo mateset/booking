@@ -62,8 +62,9 @@ const Search = () => {
         <input
           type='date'
           onChange={handleDateChange}
+          name='bookingDate'
           className='mt-4 mx-auto block'
-          style={{ border: '2px solid black', fontSize: '1rem' }}
+          style={{ border: '2px solid black', fontSize: '1.5rem' }}
         />
       </form>
       {searched && data.length === 0 && (

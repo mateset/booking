@@ -53,8 +53,8 @@ const Cars = () => {
   return (
     <div className='flex flex-col justify-center items-center w-full h-auto'>
       {/* Car img */}
-      <h1 className='text-4xl font-bold'>မိတ်ဆက်</h1>
-      <h3 className='text-4xl font-bold'>ကားသေးဝန်ဆောင်မှု</h3>
+      <div className='text-4xl font-bold'>မိတ်ဆက်</div>
+      <div className='text-3xl font-bold'>ကားသေးဝန်ဆောင်မှု</div>
       <br />
       <div className='flex flex-col items-start justify-center'>
         <DateDropdown choseDate={choseDate} setChoseDate={setChoseDate} />

@@ -43,10 +43,8 @@ const useAdminCheck = () => {
 
   useEffect(() => {
     const checkAdminStatus = async () => {
-      console.log('calling checkAdminStatus');
       try {
         const response = await checkAdmin();
-        console.log(response);
         const isAdmin = Boolean(response.isAdmin);
         setIsAdmin(isAdmin);
         // Store isAdmin status in session storage

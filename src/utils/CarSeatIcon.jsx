@@ -17,6 +17,7 @@ const CarSeatIcon = ({
       onClick={() => {
         handleSeat(Number);
       }}
+      name='seat'
       disabled={!isAvailable && !isAdmin}
     >
       {isAdmin && <p>{Number}</p>}

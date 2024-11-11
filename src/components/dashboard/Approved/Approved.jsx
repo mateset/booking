@@ -30,7 +30,7 @@ const Approved = () => {
         const approvedSeatData = await getApprovedSeats(formattedDate);
         setApprovedSeats(approvedSeatData.data);
       } catch (error) {
-        console.log(error.response);
+        // console.log(error.response);
       }
     };
     if (bookingDate) {
@@ -45,7 +45,7 @@ const Approved = () => {
         setApprovedSeats(approvedSeats.filter((seat) => seat._id !== id));
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -54,10 +54,10 @@ const Approved = () => {
       if (window.confirm('Are you sure you want to delete this booking?')) {
         const response = await deleteBooking(id);
         setApprovedSeats(approvedSeats.filter((seat) => seat._id !== id));
-        console.log(response);
+        // console.log(response);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -67,8 +67,9 @@ const Approved = () => {
         <input
           type='date'
           defaultValue={today}
+          name='ApprovedDate'
           onChange={(e) => setBookingDate(e.target.value)}
-          style={{ border: '2px solid black', fontSize: '2rem' }}
+          style={{ border: '2px solid black', fontSize: '1.5rem' }}
         />
       </div>
 
