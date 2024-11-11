@@ -19,6 +19,7 @@ const CarSeatIcon = ({
       }}
       name='seat'
       disabled={!isAvailable && !isAdmin}
+      aria-label={`Seat number ${Number}`}
     >
       {isAdmin && <p>{Number}</p>}
 
