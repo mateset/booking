@@ -7,8 +7,11 @@ import {
 import PendingSeatsList from './PendingSeatsList';
 
 const Order = () => {
-  const today = new Date().toISOString().split('T')[0];
-  const [bookingDate, setBookingDate] = useState(today);
+  // const today = new Date().toISOString().split('T')[0];
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowDate = tomorrow.toISOString().split('T')[0];
+  const [bookingDate, setBookingDate] = useState(tomorrowDate);
   const [pendingSeats, setPendingSeats] = useState([]);
 
   useEffect(() => {
@@ -75,7 +78,7 @@ const Order = () => {
       <div className='flex justify-center mt-4'>
         <input
           type='date'
-          defaultValue={today}
+          defaultValue={tomorrowDate}
           name='OrderDate'
           onChange={(e) => setBookingDate(e.target.value)}
           style={{ border: '2px solid black', fontSize: '1.5rem' }}

@@ -32,7 +32,7 @@ export const checkAdmin = async () => {
     const response = await apiService.get(`/admin/isAdmin`);
     return response.data;
   } catch (error) {
-    throw error;
+    return false;
   }
 };
 

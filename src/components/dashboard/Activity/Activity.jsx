@@ -3,8 +3,10 @@ import Details from './Details';
 import { getActivities } from '../../../service/bookingService';
 
 const Activity = () => {
-  const today = new Date().toISOString().split('T')[0];
-  const [bookingDate, setBookingDate] = useState(today);
+  const tomorrow = new Date(); // i will set later
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowDate = tomorrow.toISOString().split('T')[0];
+  const [bookingDate, setBookingDate] = useState(tomorrowDate);
   const [activityData, setActivityData] = useState([]);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const Activity = () => {
       <div className='flex justify-center mt-4'>
         <input
           type='date'
-          defaultValue={today}
+          defaultValue={tomorrowDate}
           name='ActivityDate'
           onChange={(e) => setBookingDate(e.target.value)}
           style={{ border: '2px solid black', fontSize: '1.5rem' }}

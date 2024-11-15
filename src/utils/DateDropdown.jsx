@@ -24,7 +24,7 @@ const DateDropdown = ({ setChoseDate, choseDate }) => {
     ) {
       today.setDate(today.getDate() + 1); // Move to the next day
     }
-    console.log(today.getHours(), today.getMinutes());
+    // console.log(today.getHours(), today.getMinutes());
     const nextDates = [];
     for (let i = 0; i < 10; i++) {
       const nextDay = new Date(today);

@@ -27,6 +27,12 @@ const CarInterface = ({
   const [availableSeats, setAvailableSeats] = useState([1, 2, 3, 4]);
   const [pendingSeats, setPendingSeats] = useState([]); // [1, 2, 3, 4]
   const [approvedSeats, setApprovedSeats] = useState([]);
+  const [invalidFields, setInvalidFields] = useState({
+    name: false,
+    phone: false,
+    pickup: false,
+    delivery: false,
+  });
   const [open, setOpen] = useState(false);
   //clicked is used to check if the button is clicked and not if clicked then run the tempFunc for admin
   //to get the seats data and show as default
@@ -146,31 +152,48 @@ const CarInterface = ({
 
   const postToServer = async () => {
     try {
+      const newInvalidFields = {
+        name: false,
+        phone: false,
+        pickup: false,
+        delivery: false,
+      }; // Reset invalid fields
       if (
         !book.userName ||
         book.userName.length < 3 ||
         book.userName.length > 30
       ) {
-        return showToast('Please enter a valid name', 'warning');
+        newInvalidFields.name = true;
       }
       if (
         !book.phoneNumber ||
-        book.phoneNumber.length < 8 ||
+        book.phoneNumber.length < 7 ||
         book.phoneNumber.length > 15 ||
         isNaN(book.phoneNumber)
       ) {
-        return showToast('Please enter a valid phone number', 'warning');
+        newInvalidFields.phone = true;
       }
-      if (
-        !book.userName ||
-        !book.phoneNumber ||
-        !book.pickupLocation ||
-        !book.deliveryLocation
-      ) {
-        return showToast('Please fill all required fields', 'warning');
+      if (!book.pickupLocation || book.pickupLocation.length < 3) {
+        newInvalidFields.pickup = true;
       }
+      if (!book.deliveryLocation || book.deliveryLocation.length < 3) {
+        newInvalidFields.delivery = true;
+      }
+      setInvalidFields(newInvalidFields);
+      // if (
+      //   !book.userName ||
+      //   !book.phoneNumber ||
+      //   !book.pickupLocation ||
+      //   !book.deliveryLocation
+      // ) {
+      //   return showToast('Please fill all required fields', 'warning');
+      // }
       if (book.message.length > 100) {
         return showToast('Message is too long', 'warning');
+      }
+      console.log(invalidFields);
+      if (Object.values(newInvalidFields).some((field) => field)) {
+        return showToast('Fail to book', 'error');
       }
       const existingBookingsJSON = localStorage.getItem('bookings');
       let existingBookings = existingBookingsJSON
@@ -239,6 +262,7 @@ const CarInterface = ({
         postToServer={postToServer}
         open={open}
         setOpen={setOpen}
+        setInvalidFields={setInvalidFields}
         isAdmin={isAdmin}
         book={book}
         setBook={setBook}
@@ -250,6 +274,7 @@ const CarInterface = ({
         pendingSeats={pendingSeats}
         approvedSeats={approvedSeats}
         handleDeleteBooking={handleDeleteBooking}
+        invalidFields={invalidFields}
       />
       <div className='border border-red-600 p-2 rounded-xl shadow-lg flex flex-col items-start justify-center gap-2'>
         <CarSeatIcon

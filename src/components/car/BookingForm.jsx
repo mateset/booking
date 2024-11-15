@@ -8,6 +8,7 @@ const BookingForm = ({
   postToServer,
   open,
   setOpen,
+  setInvalidFields,
   isAdmin,
   book,
   setBook,
@@ -19,6 +20,7 @@ const BookingForm = ({
   handleDeleteBooking,
   pendingSeats,
   approvedSeats,
+  invalidFields,
 }) => {
   const [loading, setLoading] = useState(false);
   const tempFunc = async () => {
@@ -52,6 +54,8 @@ const BookingForm = ({
     }
   };
 
+  // console.log(invalidFields);
+
   useEffect(() => {
     if (
       clicked &&
@@ -78,6 +82,12 @@ const BookingForm = ({
         <button
           onClick={() => {
             setOpen(false);
+            setInvalidFields({
+              name: false,
+              phone: false,
+              pickup: false,
+              delivery: false,
+            });
             setClicked(false);
             setDefaultBook();
           }}
@@ -97,8 +107,14 @@ const BookingForm = ({
           </svg>
         </button>
         <h1 className='m-2 text-orange-500 font-bold'>Your Information</h1>
+
         <div className='m-2'>
           <h1>အမည်:</h1>
+          {invalidFields?.name && (
+            <div className='text-red-500'>
+              မှန်ကန်သော အချက်အလက်များ ဖြည့်စွက်ပါ
+            </div>
+          )}
           <input
             defaultValue={book?.userName ? book.userName : ''}
             onChange={(evt) => handleInputChange('userName', evt)}
@@ -108,6 +124,11 @@ const BookingForm = ({
         </div>
         <div className='m-2'>
           <h1>ဖုန်းနံပါတ်:</h1>
+          {invalidFields?.phone && (
+            <div className='text-red-500'>
+              မှန်ကန်သော အချက်အလက်များ ဖြည့်စွက်ပါ
+            </div>
+          )}
           <input
             defaultValue={book?.phoneNumber ? book?.phoneNumber : ''}
             onChange={(evt) => handleInputChange('phoneNumber', evt)}
@@ -117,6 +138,11 @@ const BookingForm = ({
         </div>
         <div className='m-2'>
           <h1>လာကြိုရမည့်လိပ်စာ:</h1>
+          {invalidFields?.pickup && (
+            <div className='text-red-500'>
+              မှန်ကန်သော အချက်အလက်များ ဖြည့်စွက်ပါ
+            </div>
+          )}
           <input
             defaultValue={book?.pickupLocation ? book?.pickupLocation : ''}
             onChange={(evt) => handleInputChange('pickupLocation', evt)}
@@ -126,6 +152,11 @@ const BookingForm = ({
         </div>
         <div className='m-2'>
           <h1>လိုက်ပို့ရမည့် လိပ်စာ:</h1>
+          {invalidFields?.delivery && (
+            <div className='text-red-500'>
+              မှန်ကန်သော အချက်အလက်များ ဖြည့်စွက်ပါ
+            </div>
+          )}
           <input
             defaultValue={book?.deliveryLocation ? book?.deliveryLocation : ''}
             onChange={(evt) => handleInputChange('deliveryLocation', evt)}
