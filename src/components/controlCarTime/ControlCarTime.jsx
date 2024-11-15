@@ -33,7 +33,9 @@ const ControlCarTime = () => {
           return showToast('Please select date and direction', 'warning');
         const response = await getCount(choseDate, chosenDirection);
         setCount(response.count);
-      } catch (error) {}
+      } catch (error) {
+        sessionStorage.setItem('isAdmin', false);
+      }
     };
     if (choseDate && chosenDirection) getCounts();
   }, [choseDate, chosenDirection]);
@@ -153,18 +155,24 @@ const ControlCarTime = () => {
           Remove Car Time
         </button>
       </div>
-      <button
-        className='bg-blue-500 text-white w-32 p-2 mt-4 rounded-md active:shadow-md hover:bg-blue-400 hover:border-2 hover:border-blue-500'
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
-      <button
-        className='bg-blue-500 text-white w-32 p-2 mt-4 rounded-md active:shadow-md hover:bg-blue-400 hover:border-2 hover:border-blue-500'
-        onClick={handleLogoutAllDevices}
-      >
-        Logout all devices
-      </button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <div>
+        <button
+          className='bg-blue-500 text-white w-24 p-2 mt-4 rounded-md active:shadow-md hover:bg-blue-400 hover:border-2 hover:border-blue-500'
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+        <button
+          className='bg-blue-500 text-white w-24 p-2 mt-4 rounded-md active:shadow-md hover:bg-blue-400 hover:border-2 hover:border-blue-500'
+          onClick={handleLogoutAllDevices}
+        >
+          Logout all devices
+        </button>
+      </div>
     </div>
   );
 };

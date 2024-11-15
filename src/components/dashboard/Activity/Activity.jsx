@@ -19,7 +19,10 @@ const Activity = () => {
         // Assuming activities function returns data based on the date
         const data = await getActivities(formattedDate);
         setActivityData(data.data);
-      } catch (error) {}
+      } catch (error) {
+        //get session and isAdmin to false
+        sessionStorage.setItem('isAdmin', false);
+      }
     };
 
     if (bookingDate) {

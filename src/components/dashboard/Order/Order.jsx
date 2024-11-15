@@ -30,6 +30,7 @@ const Order = () => {
         }
       } catch (error) {
         // console.log(error);
+        sessionStorage.setItem('isAdmin', false);
       }
     };
     if (bookingDate) {

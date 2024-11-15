@@ -27,7 +27,8 @@ const Search = () => {
       setData(responseData.data);
       setSearched(true); // Set searched to true after search is performed
     } catch (error) {
-      alert(error.response.data.message);
+      // alert(error.response.data.message);
+      sessionStorage.setItem('isAdmin', false);
     }
   };
 

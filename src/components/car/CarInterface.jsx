@@ -285,7 +285,7 @@ const CarInterface = ({
           isAdmin={isAdmin}
           Number={1}
         />
-        <div>You cant choose the seats for back</div>
+        <div className='text-sm'>နောက်ဘက်ထိုင်ခုံများအတွက် ရွေးခွင့်မရှိပါ</div>
         <div className='flex justify-center items-center'>
           <CarSeatIcon
             isApproved={isSeatApproved(2)}

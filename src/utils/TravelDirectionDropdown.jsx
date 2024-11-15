@@ -20,7 +20,7 @@ const TravelDirectionDropdown = ({ setChosenDirection, chosenDirection }) => {
   return (
     <div className='mt-3'>
       <label>
-        Select a direction:
+        နေရာရွေးပါ:
         <select onChange={handleChooseDirection} value={chosenDirection}>
           {directions.map((direction, index) => (
             <option key={index} value={direction}>

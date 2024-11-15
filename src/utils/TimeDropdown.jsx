@@ -38,7 +38,7 @@ const TimeDropdown = ({ setChosenTime, chosenTime, count }) => {
   return (
     <div className='mt-5'>
       <label>
-        Select a time:
+        အချိန်ရွေးပါ:
         <select onChange={handleChooseTime} value={chosenTime}>
           {options}
         </select>

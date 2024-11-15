@@ -34,6 +34,7 @@ const Approved = () => {
         setApprovedSeats(approvedSeatData.data);
       } catch (error) {
         // console.log(error.response);
+        sessionStorage.setItem('isAdmin', false);
       }
     };
     if (bookingDate) {

@@ -47,7 +47,7 @@ const DateDropdown = ({ setChoseDate, choseDate }) => {
   return (
     <div className='mt-5'>
       <label>
-        Select a date:
+        သွားမည့်ရက်ရွေးပါ:
         <select onChange={handleChooseDate} value={choseDate}>
           {dates.map((date, index) => (
             <option key={index} value={date}>
