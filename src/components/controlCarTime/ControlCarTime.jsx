@@ -73,6 +73,7 @@ const ControlCarTime = () => {
         const response = await logout();
         showToast(response?.data?.message || 'logout successfully', 'success');
         sessionStorage.removeItem('isAdmin');
+        window.location.href = '/';
       } catch (error) {
         if (error.response) {
           if (error.response.status === 429) {
@@ -99,6 +100,7 @@ const ControlCarTime = () => {
           'success'
         );
         sessionStorage.removeItem('isAdmin');
+        window.location.href = '/';
       } catch (error) {
         if (error.response) {
           if (error.response.status === 429) {
