@@ -222,6 +222,9 @@ const CarInterface = ({
           localStorage.setItem('bookings', JSON.stringify(existingBookings));
         }
         setDefaultBook();
+        setAvailableSeats(
+          availableSeats.filter((seat) => seat !== res.seatNumber)
+        );
         showToast('Booking successful', 'success');
         // Check for and remove expired bookings
       } else {
