@@ -99,7 +99,6 @@ const ControlCarTime = () => {
           response?.data?.message || 'logout all successfully',
           'success'
         );
-        sessionStorage.removeItem('isAdmin');
         window.location.href = '/';
       } catch (error) {
         if (error.response) {
