@@ -258,7 +258,7 @@ const CarInterface = ({
   );
 
   return (
-    <div className='flex flex-col justify-center items-center m-5'>
+    <div className='flex flex-col justify-center items-center m-5 select-none'>
       <h1 className='m-4 text-xl font-bold'>{chosenDirection}</h1>
       <BookingForm
         addDataToBook={addDataToBook}
@@ -288,7 +288,7 @@ const CarInterface = ({
           isAdmin={isAdmin}
           Number={1}
         />
-        <div className='text-sm'>နောက်ဘက်ထိုင်ခုံများအတွက် ရွေးခွင့်မရှိပါ</div>
+        <div className=''>နောက်ဘက်ထိုင်ခုံအတွက် ရွေးခွင့်မရှိပါ</div>
         <div className='flex justify-center items-center'>
           <CarSeatIcon
             isApproved={isSeatApproved(2)}

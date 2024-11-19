@@ -79,9 +79,15 @@ const Cars = () => {
           </Link>
           <Link
             to='dashboard/control-car-time'
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center justify-center'
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 inline-flex items-center justify-center'
           >
             to add or remove car time
+          </Link>
+          <Link
+            to='dashboard/backup'
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center justify-center'
+          >
+            Backup
           </Link>
         </div>
       )}

@@ -14,6 +14,7 @@ import Approved from '../dashboard/Approved/Approved';
 import Search from '../dashboard/Search/Search';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Backup from '../backup/Backup';
 
 const AppRouter = () => {
   const routes = [
@@ -70,6 +71,7 @@ const AppRouter = () => {
           <Route path='approved' element={<Approved />} />
           <Route path='search' element={<Search />} />
           <Route path='control-car-time' element={<ControlCarTime />} />
+          <Route path='backup' element={<Backup />} />
           <Route path='*' element={<Activity />} />
         </Route>
       </Routes>
