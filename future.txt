@@ -8,8 +8,4 @@ live bookings( when another one booked a seat. its automatically reload in all b
 loading
 logout, logout all devices, change passwords if need, 
 
-$ git clone --depth 1 https://github.com/evalEmpire/perl5i.git
-$ cloc perl5i
-$ rm -rf perl5i
-
 add filters in the order and approved 
