@@ -19,12 +19,16 @@ const BackupPage = () => {
   const [time, setTime] = useState('');
   const [from, setFrom] = useState('');
   const [type, setType] = useState('csv');
+  const [archieve, setArchieve] = useState('');
+  const [approve, setApprove] = useState('');
 
   const handleBackup = () => {
     const query = new URLSearchParams();
     if (date) query.append('date', date);
     if (time) query.append('time', time);
     if (from) query.append('from', from);
+    if (archieve) query.append('archieve', archieve);
+    if (approve) query.append('approve', approve);
     if (type) query.append('type', type);
 
     const queryString = query.toString();
@@ -89,6 +93,39 @@ const BackupPage = () => {
               <option value=''>All</option>
               <option value='yangon'>Yangon → Pyay</option>
               <option value='pyay'>Pyay → Yangon</option>
+            </select>
+          </div>
+
+          {/* isArchivevd */}
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-2'>
+              Delete p that tway yaw chin tar lar
+            </label>
+            <select
+              value={type}
+              onChange={(e) => setArchieve(e.target.value)}
+              className='w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+            >
+              <option value=''>All</option>
+              <option value='true'>Par Mal</option>
+              <option value='false'>Ma Par Bu</option>
+            </select>
+          </div>
+
+          {/* isApproved */}
+
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-2'>
+              Approve p that tway pal par chin tar lar
+            </label>
+            <select
+              value={type}
+              onChange={(e) => setApprove(e.target.value)}
+              className='w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+            >
+              <option value=''>All</option>
+              <option value='true'>Yes</option>
+              <option value='false'>No</option>
             </select>
           </div>
 
