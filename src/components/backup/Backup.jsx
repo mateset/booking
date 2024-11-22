@@ -18,7 +18,7 @@ const BackupPage = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [from, setFrom] = useState('');
-  const [type, setType] = useState('csv');
+  const [type, setType] = useState('pdf');
   // const [archieve, setArchieve] = useState('');
   const [approve, setApprove] = useState('');
 
